@@ -1,15 +1,11 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASApplication
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Application
 metadata:
- name: petclinic-app-32453-asd345
+  name: application-sample
 spec:
-  displayName: "Petclinic App"
-  appModelRepository: 
-    url: https://github.com/johnmcollier/petclinic-app
-    version: 
-    context: 
+  displayName: "petclinic"
+  description: "application definition for petclinic-app"
   gitOpsRepository: 
-    url: https://github.com/johnmcollier/petclinic-gitops
-    version:
-    context:
-  description: “application definition for petclinic-app”
+    url: "https://github.com/yangcao77/stephanie-app-yangcao-take-sit"
+  appModelRepository: 
+    url: "https://github.com/yangcao77/stephanie-app-yangcao-take-sit"

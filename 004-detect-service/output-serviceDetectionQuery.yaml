@@ -1,27 +1,154 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASServiceDetectionQuery
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ComponentDetectionQuery
 metadata:
-  name: detect-services-32452
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"appstudio.redhat.com/v1alpha1","kind":"ComponentDetectionQuery","metadata":{"annotations":{},"name":"componentdetectionquery-sample4","namespace":"application-service-system"},"spec":{"git":{"url":"https://github.com/maysunfaisal/multi-components-none"}}}
+  creationTimestamp: "2022-09-14T19:09:40Z"
+  generation: 1
+  managedFields:
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        .: {}
+        f:git:
+          .: {}
+          f:url: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-09-14T19:09:40Z"
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:componentDetected:
+          .: {}
+          f:devfile-sample-java-springboot-basic-multi-components-none-3qyz:
+            .: {}
+            f:componentStub:
+              .: {}
+              f:application: {}
+              f:componentName: {}
+              f:replicas: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:source:
+                .: {}
+                f:git:
+                  .: {}
+                  f:context: {}
+                  f:devfileUrl: {}
+                  f:dockerfileUrl: {}
+                  f:url: {}
+              f:targetPort: {}
+            f:language: {}
+            f:projectType: {}
+          f:devfile-sample-python-basic-multi-components-none-6yrr:
+            .: {}
+            f:componentStub:
+              .: {}
+              f:application: {}
+              f:componentName: {}
+              f:replicas: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:source:
+                .: {}
+                f:git:
+                  .: {}
+                  f:context: {}
+                  f:devfileUrl: {}
+                  f:dockerfileUrl: {}
+                  f:url: {}
+              f:targetPort: {}
+            f:language: {}
+            f:projectType: {}
+        f:conditions: {}
+    manager: Go-http-client
+    operation: Update
+    subresource: status
+    time: "2022-09-14T19:09:42Z"
+  name: componentdetectionquery-sample4
+  namespace: application-service-system
+  resourceVersion: "35731"
+  uid: 4294f7f9-db61-45f8-8979-a1683ecd5d6d
 spec:
-  gitRepository: https://github.com/test/repository.git
+  git:
+    url: https://github.com/maysunfaisal/multi-components-none
+status:
+  componentDetected:
+    devfile-sample-java-springboot-basic-multi-components-none-3qyz:
+      componentStub:
+        application: insert-application-name
+        componentName: devfile-sample-java-springboot-basic-multi-components-none-3qyz
+        replicas: 1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 10m
+            memory: 180Mi
+        source:
+          git:
+            context: devfile-sample-java-springboot-basic
+            devfileUrl: https://registry.devfile.io/devfiles/java-springboot-basic
+            dockerfileUrl: https://raw.githubusercontent.com/devfile-samples/devfile-sample-java-springboot-basic/main/docker/Dockerfile
+            url: https://github.com/maysunfaisal/multi-components-none
+        targetPort: 8081
+      language: java
+      projectType: springboot
+    devfile-sample-python-basic-multi-components-none-6yrr:
+      componentStub:
+        application: insert-application-name
+        componentName: devfile-sample-python-basic-multi-components-none-6yrr
+        replicas: 1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+        source:
+          git:
+            context: devfile-sample-python-basic
+            devfileUrl: https://registry.devfile.io/devfiles/python-basic
+            dockerfileUrl: https://raw.githubusercontent.com/devfile-samples/devfile-sample-python-basic/main/docker/Dockerfile
+            url: https://github.com/maysunfaisal/multi-components-none
+        targetPort: 8081
+      language: python
+      projectType: python
   conditions:
-  - lastTransitionTime: "2022-01-22T16:29:29Z"
+  - lastTransitionTime: "2022-09-14T19:09:40Z"
+    message: ComponentDetectionQuery is processing
+    reason: Success
     status: "True"
-    type: Created
-  - lastTransitionTime: "2022-01-22T16:29:31Z"
+    type: Processing
+  - lastTransitionTime: "2022-09-14T19:09:42Z"
+    message: ComponentDetectionQuery has successfully finished
+    reason: OK
     status: "True"
-    type: Successful
-  data: |
-   {
-     "backend-service": {
-         "devfileFound": false,
-         "language": "go",
-         "projectType": "go",
-         "matchingDevfile": "https://registry.devfile.io/devfiles/go"
-     },
-     "frontend-service": {
-         "devfileFound": true
-         "language": "js",
-         "projectType": "nodejs",
-     }
-   }
+    type: Completed

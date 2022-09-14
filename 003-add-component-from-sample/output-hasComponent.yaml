@@ -1,67 +1,227 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASComponent
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Component
 metadata:
-  name: petclinic-app-backend-45345
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"appstudio.redhat.com/v1alpha1","kind":"Component","metadata":{"annotations":{},"name":"devfile-sample-go-basic","namespace":"application-service-system"},"spec":{"application":"application-sample","componentName":"devfile-sample-go-basic","env":[{"name":"FOO","value":"foo1"},{"name":"BAR","value":"bar1"}],"replicas":1,"resources":{"limits":{"cpu":"2","memory":"500Mi","storage":"400Mi"},"requests":{"cpu":"700m","memory":"400Mi","storage":"200Mi"}},"route":"route111","source":{"git":{"url":"https://github.com/devfile-samples/devfile-sample-go-basic"}},"targetPort":1111}}
+  creationTimestamp: "2022-09-14T19:07:04Z"
+  finalizers:
+  - component.appstudio.redhat.com/finalizer
+  generation: 2
+  managedFields:
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .: {}
+          v:"component.appstudio.redhat.com/finalizer": {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"f4268845-ea20-49fa-b95e-40abd9e425c4"}: {}
+      f:spec:
+        f:containerImage: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2022-09-14T19:07:04Z"
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        .: {}
+        f:application: {}
+        f:componentName: {}
+        f:env: {}
+        f:replicas: {}
+        f:resources:
+          .: {}
+          f:limits:
+            .: {}
+            f:cpu: {}
+            f:memory: {}
+            f:storage: {}
+          f:requests:
+            .: {}
+            f:cpu: {}
+            f:memory: {}
+            f:storage: {}
+        f:route: {}
+        f:source:
+          .: {}
+          f:git:
+            .: {}
+            f:url: {}
+        f:targetPort: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-09-14T19:07:04Z"
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:conditions: {}
+        f:containerImage: {}
+        f:devfile: {}
+        f:gitops:
+          .: {}
+          f:commitID: {}
+          f:context: {}
+          f:repositoryURL: {}
+    manager: Go-http-client
+    operation: Update
+    subresource: status
+    time: "2022-09-14T19:07:05Z"
+  name: devfile-sample-go-basic
+  namespace: application-service-system
+  ownerReferences:
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    kind: Application
+    name: application-sample
+    uid: f4268845-ea20-49fa-b95e-40abd9e425c4
+  resourceVersion: "34805"
+  uid: caa87efb-f45b-4ca3-aa20-e3a55fe25101
 spec:
-  componentName: backend
-  application: petclinic-app-32453-asd345
+  application: application-sample
+  componentName: devfile-sample-go-basic
+  containerImage: quay.io/redhat-appstudio/user-workload:application-service-system-devfile-sample-go-basic
+  env:
+  - name: FOO
+    value: foo1
+  - name: BAR
+    value: bar1
+  replicas: 1
+  resources:
+    limits:
+      cpu: "2"
+      memory: 500Mi
+      storage: 400Mi
+    requests:
+      cpu: 700m
+      memory: 400Mi
+      storage: 200Mi
+  route: route111
   source:
-    gitURL: https://github.com/devfile-samples/devfile-sample-python-basic
+    git:
+      url: https://github.com/devfile-samples/devfile-sample-go-basic
+  targetPort: 1111
 status:
   conditions:
-  - lastTransitionTime: "2022-01-22T17:29:31Z"
+  - lastTransitionTime: "2022-09-14T19:07:05Z"
+    message: GitOps resource generated successfully
+    reason: OK
+    status: "True"
+    type: GitOpsResourcesGenerated
+  - lastTransitionTime: "2022-09-14T19:07:05Z"
+    message: Component has been successfully created
+    reason: OK
     status: "True"
     type: Created
-  devfile:
-    schemaVersion: 2.0.0
-    metadata:
-      name: python
-      version: 1.0.0
-      attributes:
-        alpha.build-context: .
-        alpha.build-dockerfile: docker/Dockerfile
-    starterProjects:
-      - name: python-example
-        git:
-          remotes:
-            origin: https://github.com/odo-devfiles/python-ex
-    components:
-      - name: buildguidance
-        attributes:
-          tool: console-import
-        container:
-          image: buildguidanceimage-placeholder
-          memoryLimit: 1024Mi
-          endpoints:
-            - name: http-8081
-              targetPort: 8081
-      - name: py-web
-        container:
-          image: quay.io/eclipse/che-python-3.7:nightly
-          mountSources: true
-          endpoints:
-            - name: web
-              targetPort: 8080
+  containerImage: quay.io/redhat-appstudio/user-workload:application-service-system-devfile-sample-go-basic
+  devfile: |
     commands:
-      - id: pip-install-requirements
-        exec:
-          commandLine: pip install --user -r requirements.txt
-          group:
-            kind: build
-            isDefault: true
-          component: py-web
-      - id: run-app
-        exec:
-          commandLine: "python app.py"
-          workingDir: ${PROJECTS_ROOT}
-          component: py-web
-          group:
-            kind: run
-            isDefault: true
-      - id: debugpy
-        exec:
-          commandLine: "pip install --user debugpy && python -m debugpy --listen 0.0.0.0:${DEBUG_PORT} app.py"
-          workingDir: ${PROJECTS_ROOT}
-          component: py-web
-          group:
-            kind: debug
+    - attributes:
+        api.devfile.io/imported-from: 'id: go, registryURL: https://registry.devfile.io'
+      exec:
+        commandLine: GOCACHE=${PROJECT_SOURCE}/.cache go build main.go
+        component: runtime
+        group:
+          isDefault: true
+          kind: build
+        hotReloadCapable: false
+        workingDir: ${PROJECT_SOURCE}
+      id: build
+    - attributes:
+        api.devfile.io/imported-from: 'id: go, registryURL: https://registry.devfile.io'
+      exec:
+        commandLine: ./main
+        component: runtime
+        group:
+          isDefault: true
+          kind: run
+        hotReloadCapable: false
+        workingDir: ${PROJECT_SOURCE}
+      id: run
+    - apply:
+        component: outerloop-build
+      id: build-image
+    - apply:
+        component: outerloop-deploy
+      id: deployk8s
+    - composite:
+        commands:
+        - build-image
+        - deployk8s
+        group:
+          isDefault: true
+          kind: deploy
+        parallel: false
+      id: deploy
+    components:
+    - attributes:
+        api.devfile.io/imported-from: 'id: go, registryURL: https://registry.devfile.io'
+      container:
+        dedicatedPod: true
+        endpoints:
+        - name: http-go
+          secure: false
+          targetPort: 8080
+        image: quay.io/devfile/golang:latest
+        memoryLimit: 1024Mi
+        mountSources: true
+      name: runtime
+    - image:
+        dockerfile:
+          buildContext: .
+          rootRequired: false
+          uri: docker/Dockerfile
+        imageName: go-image:latest
+      name: outerloop-build
+    - attributes:
+        deployment/container-port: 1111
+        deployment/containerENV:
+        - name: FOO
+          value: foo1
+        - name: BAR
+          value: bar1
+        deployment/cpuLimit: "2"
+        deployment/cpuRequest: 700m
+        deployment/memoryLimit: 500Mi
+        deployment/memoryRequest: 400Mi
+        deployment/replicas: 1
+        deployment/route: route111
+        deployment/storageLimit: 400Mi
+        deployment/storageRequest: 200Mi
+      kubernetes:
+        uri: outerloop-deploy.yaml
+      name: outerloop-deploy
+    metadata:
+      attributes:
+        alpha.dockerimage-port: 8081
+      language: go
+      name: go
+      projectType: go
+      provider: Red Hat
+      supportUrl: https://github.com/devfile-samples/devfile-support#support-information
+      tags:
+      - Go
+      version: 1.0.0
+    schemaVersion: 2.2.0
+    starterProjects:
+    - attributes:
+        api.devfile.io/imported-from: 'id: go, registryURL: https://registry.devfile.io'
+      git:
+        checkoutFrom:
+          revision: main
+        remotes:
+          origin: https://github.com/devfile-samples/devfile-stack-go.git
+      name: go-starter
+  gitops:
+    commitID: |
+      00ecd6e67e785b16be979b30da77d717fb738349
+    context: ./
+    repositoryURL: https://github.com/yangcao77/stephanie-app-yangcao-take-sit

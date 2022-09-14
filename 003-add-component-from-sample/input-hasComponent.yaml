@@ -1,19 +1,27 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASComponent
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Component
 metadata:
-  name: petclinic-app-backend-45345
+  name: devfile-sample-go-basic
 spec:
-  componentName: backend
-  application: petclinic-app-32453-asd345
-  source:
-    gitURL: https://github.com/devfile-samples/devfile-sample-python-basic
-  resource:
+  componentName: devfile-sample-go-basic
+  application: application-sample
+  replicas: 1
+  targetPort: 1111
+  route: route111
+  resources:
     limits:
-      CPU: 1M
-      Memory: 1Gi
-  replicas: 3
-  route: myapplication.someurl.com
-  port: 8080
+      memory: "500Mi"
+      cpu: "2"
+      storage: "400Mi"
+    requests:
+      memory: "400Mi"
+      cpu: "700m"
+      storage: "200Mi"
   env:
-    - key: SOME_ENV
-      value: test-value
+  - name: FOO
+    value: "foo1"
+  - name: BAR
+    value: "bar1"
+  source:
+    git:
+      url: https://github.com/devfile-samples/devfile-sample-go-basic

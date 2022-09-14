@@ -1,6 +1,7 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASServiceDetectionQuery
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ComponentDetectionQuery
 metadata:
-  name: detect-services-32452
+  name: componentdetectionquery-sample4
 spec:
-  gitRepository: https://github.com/test/repository.git
+  git:
+    url: https://github.com/maysunfaisal/multi-components-none

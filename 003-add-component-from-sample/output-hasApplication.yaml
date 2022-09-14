@@ -1,32 +1,88 @@
-apiVersion: has.appstudio/v1alpha1
-kind: HASApplication
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Application
 metadata:
- name: petclinic-app-32453-asd345
+  annotations:
+    finalizeCount: "0"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"appstudio.redhat.com/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"application-sample","namespace":"application-service-system"},"spec":{"appModelRepository":{"url":"https://github.com/yangcao77/stephanie-app-yangcao-take-sit"},"description":"application definition for petclinic-app","displayName":"petclinic","gitOpsRepository":{"url":"https://github.com/yangcao77/stephanie-app-yangcao-take-sit"}}}
+  creationTimestamp: "2022-09-14T19:03:43Z"
+  finalizers:
+  - application.appstudio.redhat.com/finalizer
+  generation: 1
+  managedFields:
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:finalizeCount: {}
+        f:finalizers:
+          .: {}
+          v:"application.appstudio.redhat.com/finalizer": {}
+    manager: Go-http-client
+    operation: Update
+    time: "2022-09-14T19:03:43Z"
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:conditions: {}
+        f:devfile: {}
+    manager: Go-http-client
+    operation: Update
+    subresource: status
+    time: "2022-09-14T19:03:43Z"
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        .: {}
+        f:appModelRepository:
+          .: {}
+          f:url: {}
+        f:description: {}
+        f:displayName: {}
+        f:gitOpsRepository:
+          .: {}
+          f:url: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-09-14T19:03:43Z"
+  name: application-sample
+  namespace: application-service-system
+  resourceVersion: "34801"
+  uid: f4268845-ea20-49fa-b95e-40abd9e425c4
 spec:
-  displayName: "Petclinic App"
-  appModelRepository: https://github.com/johnmcollier/petclinic-app
-  gitOpsRepository: https://github.com/johnmcollier/petclinic-gitops
-  description: “application definition for petclinic-app”
+  appModelRepository:
+    url: https://github.com/yangcao77/stephanie-app-yangcao-take-sit
+  description: application definition for petclinic-app
+  displayName: petclinic
+  gitOpsRepository:
+    url: https://github.com/yangcao77/stephanie-app-yangcao-take-sit
 status:
   conditions:
-  - lastTransitionTime: "2022-01-22T16:29:31Z"
+  - lastTransitionTime: "2022-09-14T19:03:43Z"
+    message: Application has been successfully created
+    reason: OK
     status: "True"
     type: Created
-  - lastTransitionTime: "2022-01-22T16:31:31Z"
-    status: "True"
-    type: Updated
-  devfile:
-    schemaVersion: 2.1.0
+  devfile: |
     metadata:
-    name: petclinic-app
-    attributes:
-      has.description: "application definition for petclinic-app"
-      has.identifier: "com.redhat.has"
-      has.version: "has/v1"
-      sourceRepo: 'https://github.com/johnmcollier/petclinic-app'
-      gitOpsRepo: 'https://github.com/johnmcollier/petclinic-gitops'
+      attributes:
+        appModelRepository.context: /
+        appModelRepository.url: https://github.com/yangcao77/stephanie-app-yangcao-take-sit
+        gitOpsRepository.context: ./
+        gitOpsRepository.url: https://github.com/yangcao77/stephanie-app-yangcao-take-sit
+      description: application definition for petclinic-app
+      name: petclinic
     projects:
-    - name: backend
-      git:
+    - git:
         remotes:
-          origin: https://github.com/devfile-samples/devfile-sample-python-basic
+          origin: https://github.com/devfile-samples/devfile-sample-go-basic
+      name: devfile-sample-go-basic
+    schemaVersion: 2.1.0
